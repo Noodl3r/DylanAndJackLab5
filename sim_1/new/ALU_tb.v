@@ -202,10 +202,69 @@ module ALU_tb;
     #4;
     R2 = 32'hFFFFFFFF;
     R3 = 32'hFFFFFFFF;
+    
+    // MORE CHARACTERISTIC EXAMPLES
+    ALUOp = 3'b000; //mov
+    #4 R2 = 32'hFFFFFFFF;
+    #4 R2 = 32'hF0000000;
+    #4 R2 = 32'h00000001;   
+    ALUOp = 3'b001; //not
+    #4 R2 = 32'h80000000;
+    #4 R2 = 32'h0F0F0F0F;
+    #4 R2 = 32'h00000001;
+    ALUOp = 3'b010; //add
+    R2 = 32'h7FFFFFFF;    // signed overflow (go neg)
+    R3 = 32'h00000001;
+    #4;
+    R2 = 32'h80000000;    // signed overflow (go pos)
+    R3 = 32'h80000000;
+    #4;
+    R2 = 32'hDEADBEEF;    // no nothin
+    R3 = 32'd0;
+    ALUOp = 3'b011; //nor
+    #4;
+    R2 = 32'd0;
+    R3 = 32'd0;            // base case
+    #4;
+    R2 = 32'h0F0F0F0F;
+    R3 = 32'hF0F0F0F0;     // cool pattern
+    #4;
+    R2 = 32'h00FF00FF;
+    R3 = 32'h0000FF00;     // even cooler pattern
+    ALUOp = 3'b100; //sub 
+    #4;
+    R2 = 32'h80000000; // signed overflow
+    R3 = 32'h00000001;
+    #4;
+    R2 = 32'h7FFFFFFF;  // signed overflow
+    R3 = 32'h80000000;
+    #4;
+    R2 = 32'hDEADBEEF;  // le base case
+    R3 = 32'hDEADBEEF;
+    ALUOp = 3'b101; //nand 
+    #4;
+    R2 = 32'd0;
+    R3 = 32'd0;            // le base case
+    #4;
+    R2 = 32'h0F0F0F0F;  // coolest pattern
+    R3 = 32'hFFFF0F0F;     
+    #4;
+    R2 = 32'h80000000;
+    R3 = 32'h80000000;     //twill not explode i hope
+    ALUOp = 3'b101; //and 
+    #4;
+    R2 = 32'h0F0F0F0F;
+    R3 = 32'hF0F0F0F0;   // kinda meh pattern tbh
+    #4;
+    R2 = 32'h80000000;
+    R3 = 32'h80000000;     // kaboom
+    #4;
+    R2 = 32'hDEADBEEF;
+    R3 = 32'hFFFF0000;     //pattern and no pattern (what could happen??)
 
 
     // Wait some time and then finish simulation
-    #50;
+    #10;
     $finish;
   end
 
