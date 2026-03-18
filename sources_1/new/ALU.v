@@ -48,7 +48,7 @@ module ALU #(
       Operand2
   );
 
-  // opcode 100 handled on line 10. 
+  // opcode 100 handled on line 41. 
   // opcode 101, NAND
   wire [WIDTH-1:0] nand_result;
   paramNand #(WIDTH) nand1 (
